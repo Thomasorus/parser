@@ -11,6 +11,10 @@ The parser exists in two branches:
 
 If you are new to Kaku, use the master branch!
 
+## License
+
+Kaku 書く is a free to use by individuals and organizations that do not operate by capitalist principles. For more information see the [license](LICENSE) file.
+
 ## Syntax
 
 Kaku uses some syntax from Markdown for basic text transformation. However it uses an array like declaration with special characters for things like quotes, links and images.
