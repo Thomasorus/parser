@@ -2,8 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-void parser(char** str) {
-     *str = "lol";
+
+// OLD TEST WILL REDO LATER
+// void parser(char** str) {
+//      *str = "lol";
 
      // char rules[2][20] = { 
      //      "/(#+)(.*)/g",
@@ -17,7 +19,7 @@ void parser(char** str) {
      //      printf("%d\n", i);
      //      printf("%s\n", rules[i]);
      // }
-}
+// }
 
 void readFile(char** path, char** textContent) {
      FILE *file;
@@ -68,8 +70,5 @@ int main(void) {
 
      splitText(&textContent);
 
-     // char* test = "# Title";
-     // parser(&test);
-     // printf("%s\n", ptr);
      return 0;
 }
