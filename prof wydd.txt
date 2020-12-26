@@ -1,0 +1,47 @@
+Principe du pointeur :
+- C'est un type.
+- Un entier de 64 bits, 8 octets.
+- Dedans tu mets l'adresse mémoire de la donnée vers laquelle tu veux pointer -> Si tu as un tableau, tu l'envoie en tant que pointeur. Ca va pointer vers la premier élément de ton tableau. Mais comme c'est que un tableau et que ça n'a pas de taille, tu ne fais que pointer vers un endroit mémoire. Et seulement après, quand tu fais des trucs, genre accéder au cinquième élément, tu te réfères au premier pointeur, puis tu te déplaces de 4 et c'est le nouveau pointeur.
+- En fait c'est une etagère le C ptdr.
+- Les entités sont manipulées dans des endroits en mémoire dont on connait la localisation et leur taille.
+
+
+Malloc : allouer un espace ménoire avant de faire une manipulation.
+
+stdint = permet d'être sur de ce que tu manipules
+
+
+
+Diff stack et Heap
+
+Stack / Pile :
+
+void main() {
+int a = 0;
+exit(a);
+}
+
+Quand on entre dans main on est dans un certain endroit dans la mémoire, pré-alloué. A existe tant que la fonction est en cours.
+
+Heap / Tas :
+
+void main() {
+int* a = malloc(sizeof(int));
+exit(a);
+}
+
+Ici on demande à allouer un endroit dans la mémoire (cela retourne un pointeur) et quand ce sera fini, cet endroit est toujours alloué.
+
+
+Valgrind : permet de savoir si on a nettoyé sa pile.
+
+
+char* concat(char* a, char* b) {
+int lenA = strlen(a);
+int lenB = strlen(b);
+char buffer[] = malloc((lenA+lenB+1) * sizeof(char));
+memcpy(buffer, a, lenA* sizeof(char));
+memcpy(buffer+lenA, b, lenB* sizeof(char));
+buffer[lenA+lenB] = 0; // null-terminated string
+return buffer;
+}
