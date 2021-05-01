@@ -1,0 +1,36 @@
+# Kaku 書く
+
+Welcome to Kaku's demo! Kaku is my own markup language. It's inspired by Markdown with a few modification for quotes, links, images and lists handling. It was created to fit my needs.
+
+{https://github.com/Thomasorus/Kaku, "Visit the repo for the full documentation.", Link to Kaku's repo}
+
+> "Kaku is mostly used for my static website build.", Thomasorus, Kaku's Repo, https://github.com/Thomasorus/Kaku
+
+Kaku can do *bold*, _italic_ and `inline code` and ~strike~ text!
+
+Of course lists are possible:
+
+## Title 2
+
+- Bullet
+- List
+
++ Ordered
++ List
+
+? Term 1 : Definition 1
+? Term 2 : Definition 2
+
+As for images you can generate classic image tags or figure tags:
+
+[https://i.imgur.com/oJXNeQm.jpg, Sailor moon and Bruce Lee, "I am the figcaption!"]
+
+It's also possible to add videos as fake gifs or as real videos:
+
+|https://media.giphy.com/media/bXVAd2ZD5ND9e/giphy.mp4, g|
+
+|https://media.giphy.com/media/bXVAd2ZD5ND9e/giphy.mp4|
+
+The same syntax is used for mp3 audio:
+
+|https://archive.org/serve/FurEliseLudwigVanBeethoven/fur%20elise%20%28Ludwig%20van%20Beethoven%29.mp3|
