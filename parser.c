@@ -1,78 +1,92 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
-// OLD TEST WILL REDO LATER
-// void parser(char** str) {
-//      *str = "lol";
-// char rules[2][20] = {
-//      "/(#+)(.*)/g",
-//      "/`{3,}(?!.*`)/g"
-//       };
-// int len = sizeof(rules)/sizeof(rules[0]);
-// printf("%d\n", len);
-// int i = 0;
-// for(i = 0; i < len; i++){
-//      printf("%d\n", i);
-//      printf("%s\n", rules[i]);
-// }
-// }
-
-void readFile(char *path, char **textContent)
+int main()
 {
-     FILE *file;
-     file = fopen(path, "r");
-     if (file == NULL)
-     {
-          printf("Error file not found!");
-          exit(1);
-     }
+    FILE *file = fopen("demo.kaku", "r");
+    char out[1024];
+    int count = 0;
+    char ch;
+    char previous;
 
-     char buffer[10];    // 10 chars dans la stack
-     char *input = 0;    //Size of input is unknow and will be changed
-     size_t cur_len = 0; //size_t is an unsigned integer. This type is used to represent the size of an object
+    int isTitle = 0;
+    int isBold = 0;
+    int isEm = 0;
+    int isStrike = 0;
+    int isCode = 0;
 
-     // Reading file
-     while (fgets(buffer, sizeof(buffer), file) != 0)
-     {
-          size_t buf_len = strlen(buffer);
-          char *extra = realloc(input, buf_len + cur_len + 1);
-          if (extra == 0)
-               break;
-          input = extra;
-          strcpy(input + cur_len, buffer);
-          cur_len += buf_len;
-     }
-     *textContent = input;
-     fclose(file);
-}
-
-void splitText(char *text, char *delimiter, char **splittedText)
-{
-     char *ptr = strtok(text, delimiter);
-     char test[] = "";
-     int i;
-     for (i = 0; ptr != NULL; i++)
-     {
-          printf("Line: %s \n", ptr);
-          ptr = strtok(NULL, delimiter);
-     }
-}
-
-int main(void)
-{
-     char *path = "demo.kaku";
-
-     // Recover text file and get the number of lines
-     char *textContent = 0; //Point vers rien aka le début de la ram ptdr je comprends rien mais un peu
-     readFile(path, &textContent);
-     int contentLength = strlen(textContent);
-     printf("Number of characters: %d \n", contentLength);
-
-     char *splittedText = 0;
-     char *delimiter = "\n";
-     splitText(textContent, delimiter, &splittedText);
-     printf("Number of lines without empty text:%d \n", *splittedText);
-
-     return 0;
+    while ((ch = (char)fgetc(file)) != EOF)
+    {
+        printf("%c\n", ch);
+        switch (ch)
+        {
+        case '#':
+            if (previous == '\n' || count == 0)
+            {
+                isTitle += 1;
+                printf("%s\n", "Start Title");
+            }
+            if (previous == '#')
+            {
+                isTitle += 1;
+                printf("%s\n", "Increment Title");
+            }
+            break;
+        case '*':
+            if (isBold == 0)
+            {
+                isBold = 1;
+                printf("%s\n", "Start Bold");
+            }
+            else
+            {
+                printf("%s\n", "End Bold");
+            }
+            break;
+        case '_':
+            if (isEm == 0)
+            {
+                isEm = 1;
+                printf("%s\n", "Start emphasis");
+            }
+            else
+            {
+                printf("%s\n", "End Emphasis");
+            }
+            break;
+        case '~':
+            if (isStrike == 0)
+            {
+                isStrike = 1;
+                printf("%s\n", "Start strike");
+            }
+            else
+            {
+                printf("%s\n", "End strike");
+            }
+            break;
+        case '`':
+            if (isCode == 0)
+            {
+                isCode = 1;
+                printf("%s\n", "Start code");
+            }
+            else
+            {
+                printf("%s\n", "End code");
+            }
+            break;
+        case '\n':
+            if (isTitle > 0)
+            {
+                printf("%s\n", "End title");
+                printf("%d\n", isTitle);
+                isTitle = 0;
+            }
+        default:
+            return 1;
+        }
+        previous = ch;
+        count += 1;
+    }
+    fclose(file);
 }
