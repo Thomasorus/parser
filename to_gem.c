@@ -102,6 +102,7 @@ static List *initList(const char *string, size_t size)
     l->strings[0] = (char *)malloc(size);
     strcpy(l->strings[0], string);
     l->size = 1;
+    // printf("%s\n", l->strings[0]);
     return l;
 }
 
